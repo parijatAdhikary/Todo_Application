@@ -1,10 +1,10 @@
 package com.example.todoapplication
 
+import android.provider.ContactsContract
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-
 
 @Dao
 interface TaskDao {
@@ -15,7 +15,7 @@ interface TaskDao {
     suspend fun update(task: Task)
 
     @Query("SELECT * FROM tasks")
-    suspend fun getAllTasks(item:String,date:String,): List<Task>
+    suspend fun getAllTasks(): List<Task>
 
     @Query("DELETE FROM tasks")
     suspend fun deleteAll()

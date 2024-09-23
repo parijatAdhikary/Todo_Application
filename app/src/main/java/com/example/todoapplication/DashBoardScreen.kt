@@ -138,7 +138,7 @@ fun TaskScreen(viewModel: TaskViewModel) {
 
         Button(onClick = {
             if (taskName.isNotBlank()) {
-                viewModel.addTask(Task(name = taskName, date = "10/2/2025" ))
+                viewModel.addTask(Task(name = taskName))
                 taskName = ""  // Clear the input field
             }
         }) {
@@ -152,7 +152,6 @@ fun TaskScreen(viewModel: TaskViewModel) {
                 TaskItem(task)
             }
         }
-
     }
 }
 
@@ -160,7 +159,6 @@ fun TaskScreen(viewModel: TaskViewModel) {
 fun TaskItem(task: Task) {
     Text(text = task.name)
 }
-
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
