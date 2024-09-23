@@ -87,27 +87,6 @@ fun LoginScreen(navController: NavController) {
     BackHandler {
         activity?.finish()
     }
-    /*val isLoggedInFlow = getPreference(context,PreferenceKeys.IS_LOGGED_IN)
-    val isLoggedIn by isLoggedInFlow.collectAsState(initial = false)
-    Text("I am in LoginActivity:$isLoggedIn")
-    Button(onClick = {
-        coroutineScope.launch {
-            savePreference(true, context,PreferenceKeys.IS_LOGGED_IN)
-        }
-
-    }) {
-        Text("Click")
-    }
-    Log.d("StatusTAG", "LoginActivity: $isLoggedIn")
-    if(isLoggedIn) {
-       navController.navigate(Routes.OnboardingActivity)
-    }
-
-     */
-
-
-
-
 
     var userEmail by remember { mutableStateOf(TextFieldValue("")) }
     var userPassword by remember { mutableStateOf(TextFieldValue("")) }

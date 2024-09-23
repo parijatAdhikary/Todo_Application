@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    kotlin("kapt")
+
 }
 
 android {
@@ -72,7 +75,30 @@ dependencies {
     implementation (libs.material3 )
 
     implementation (libs.lottie.compose)
+    implementation(libs.material3)
 
+// Room components
+    implementation (libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+
+    // Kotlin Coroutines
+    implementation (libs.kotlinx.coroutines.android)
+
+    // For Jetpack Compose
+    implementation (libs.ui)
+    implementation (libs.androidx.material3.v100)
+
+    // Room components
+    implementation ("androidx.room:room-runtime:2.5.0")
+    kapt ("androidx.room:room-compiler:2.5.0")
+    implementation( "androidx.room:room-ktx:2.5.0" )// Add this line
+
+    // Kotlin Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+
+    // For Jetpack Compose
+    implementation ("androidx.compose.ui:ui:1.3.0")
+    implementation ("androidx.compose.material3:material3:1.0.0")
 
 
 }

@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -29,29 +30,25 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun OnboardingScreen(navController: NavHostController) {
-
-
-
-
-
-
     var showOnboarding by rememberSaveable { mutableStateOf(true) }
     if(showOnboarding)
         OnboardingScreenLayout(onFinishOnboarding = { showOnboarding = false })
-    else
-        navController.navigate(Routes.DashBoardActivity)
-
+    else{
+        LaunchedEffect(Unit) {
+            navController.navigate(Routes.DashBoardActivity)
+        }
+    }
 }
 
 
-data class OnboardingPage(val title: String, val description: String, val id:Int)
+data class OnboardingPage(val title: String, val description: String)
 
 @Composable
 fun OnboardingScreenLayout(onFinishOnboarding: () -> Unit) {
     val onboardingPages = listOf(
-        OnboardingPage("Welcome", "Explore the features of our app", 1),
-        OnboardingPage("Stay Connected", "Communicate with your friends easily", 2),
-        OnboardingPage("Get Started", "Let’s get started!", 3)
+        OnboardingPage("Welcome", "Explore the features of our app"),
+        OnboardingPage("Don't forget anything", "Make your Todo list handy & easily"),
+        OnboardingPage("Get Started", "Let’s get started!")
     )
 
     var currentPage by rememberSaveable { mutableStateOf(0) }

@@ -64,7 +64,7 @@ private fun SplashScreenLayout(navController: NavController) {
     }
 
     LaunchedEffect(Unit) {
-        delay(5*1000)
+        delay(0*1000)
 
         if(!isLoggedIn) {
             navController.navigate(Routes.LoginActivity)
