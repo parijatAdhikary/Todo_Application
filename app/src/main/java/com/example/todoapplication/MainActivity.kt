@@ -28,13 +28,13 @@ class MainActivity : ComponentActivity() {
                 SplashScreen(navController)
             }
             composable(Routes.DashBoardActivity){
-                DashBoardActivity(navController)
+                DashBoardScreen(navController)
             }
             composable(Routes.LoginActivity){
-                LoginActivity(navController)
+                LoginScreen(navController)
             }
             composable(Routes.OnboardingActivity){
-                OnboardingActivity(navController)
+                OnboardingScreen(navController)
             }
         })
     }

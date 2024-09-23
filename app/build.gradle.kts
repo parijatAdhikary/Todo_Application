@@ -71,6 +71,8 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation (libs.material3 )
 
+    implementation (libs.lottie.compose)
+
 
 
 }
