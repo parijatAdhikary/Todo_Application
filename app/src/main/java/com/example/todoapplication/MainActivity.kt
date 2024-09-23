@@ -36,6 +36,9 @@ class MainActivity : ComponentActivity() {
             composable(Routes.OnboardingActivity){
                 OnboardingScreen(navController)
             }
+            composable(Routes.SettingsScreen){
+                SettingsScreen(navController)
+            }
         })
     }
 }

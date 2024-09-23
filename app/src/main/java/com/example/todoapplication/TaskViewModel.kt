@@ -25,4 +25,11 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
             getTasks()  // Refresh the task list
         }
     }
+
+    fun deleteTask(taskId: Long) {
+        viewModelScope.launch {
+            repository.deleteTaskById(taskId)
+            tasks.addAll(repository.getAllTasks())
+        }
+    }
 }
