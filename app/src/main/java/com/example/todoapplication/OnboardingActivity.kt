@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -20,15 +18,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.todoapplication.PreferenceKeys.IS_FIRST_OPEN
 
 @Composable
 fun OnboardingActivity(navController: NavHostController) {
 
-    val context=LocalContext.current
+    /*val context=LocalContext.current
     val isFirstOpenFlow = getPreference(context, IS_FIRST_OPEN)
     val isFirstOpen by isFirstOpenFlow.collectAsState(initial = true)
     Text("I am in OnBoardActivity:$isFirstOpen")
@@ -43,6 +39,16 @@ fun OnboardingActivity(navController: NavHostController) {
         else
             navController.navigate(Routes.DashBoardActivity)
     }
+
+     */
+
+
+    var showOnboarding by rememberSaveable { mutableStateOf(true) }
+    if(showOnboarding)
+        OnboardingScreen(onFinishOnboarding = { showOnboarding = false })
+    else
+        navController.navigate(Routes.DashBoardActivity)
+
 }
 
 

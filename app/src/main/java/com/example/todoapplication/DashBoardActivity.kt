@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
-import com.example.todoapplication.PreferenceKeys.IS_FIRST_OPEN
 
 @Composable
 fun DashBoardActivity(navController: NavController){

@@ -49,7 +49,7 @@ fun LoginActivity(navController: NavController) {
     BackHandler {
         activity?.finish()
     }
-    val isLoggedInFlow = getPreference(context,PreferenceKeys.IS_LOGGED_IN)
+    /*val isLoggedInFlow = getPreference(context,PreferenceKeys.IS_LOGGED_IN)
     val isLoggedIn by isLoggedInFlow.collectAsState(initial = false)
     Text("I am in LoginActivity:$isLoggedIn")
     Button(onClick = {
@@ -64,9 +64,20 @@ fun LoginActivity(navController: NavController) {
     if(isLoggedIn) {
        navController.navigate(Routes.OnboardingActivity)
     }
+
+     */
+    Button(onClick = {
+        coroutineScope.launch {
+            navController.navigate(Routes.OnboardingActivity)
+        }
+
+    }) {
+        Text("Go to")
+    }
+
     PartialBottomSheet()
 }
-
+/*
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "app_information")
 
 object PreferenceKeys {
@@ -84,6 +95,8 @@ fun getPreference(context: Context, key: Preferences.Key<Boolean>): Flow<Boolean
             preferences[key] ?: false
         }
 }
+
+ */
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
