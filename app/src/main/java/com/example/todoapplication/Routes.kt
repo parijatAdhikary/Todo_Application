@@ -1,9 +1,11 @@
 package com.example.todoapplication
 
+import com.debduttapanda.j3lib.models.Route
+
 object Routes {
-    val SettingsScreen= "SettingsScreen"
-    val LoginActivity= "LoginActivity"
-    val OnboardingActivity="OnboardingActivity"
-    var SplashScreen="SplashScreen"
-    var DashBoardActivity="DashBoardActivity"
+    val SettingsScreen= Route("SettingsScreen")
+    val LoginActivity=Route("LoginActivity")
+    val OnboardingActivity=Route("OnboardingActivity")
+    var SplashScreen=Route("SplashScreen")
+    var DashBoardActivity=Route("DashBoardActivity")
 }

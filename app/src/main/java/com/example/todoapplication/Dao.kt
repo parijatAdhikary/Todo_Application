@@ -1,6 +1,5 @@
 package com.example.todoapplication
 
-import android.provider.ContactsContract
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -22,4 +21,10 @@ interface TaskDao {
 
     @Query("DELETE FROM tasks WHERE id = :taskId")
     suspend fun deleteTaskById(taskId: Long)
+
+
+    @Query("UPDATE tasks SET todolist = :taskName, date = :taskDate WHERE id = :taskId")
+    suspend fun updateTaskById(taskId: Long, taskName: String, taskDate: String)
+
+
 }

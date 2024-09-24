@@ -1,7 +1,7 @@
 package com.example.todoapplication
 
+import android.os.Bundle
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Switch
@@ -17,9 +17,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.debduttapanda.j3lib.InterCom
+import com.debduttapanda.j3lib.WirelessViewModel
+import com.debduttapanda.j3lib.models.EventBusDescription
+import com.debduttapanda.j3lib.models.Route
 
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen() {
     ToggleSwitch()
 }
 
@@ -39,5 +43,24 @@ fun ToggleSwitch() {
             checked = isChecked.value,
             onCheckedChange = { isChecked.value = it },modifier = Modifier.padding(0.dp,14.dp,0.dp,0.dp)
         )
+    }
+}
+
+
+class SettingsScreenViewModel: WirelessViewModel(){
+    override fun eventBusDescription(): EventBusDescription? {
+        return null
+    }
+
+    override fun interCom(message: InterCom) {
+    }
+
+    override fun onBack() {
+    }
+
+    override fun onNotification(id: Any?, arg: Any?) {
+    }
+
+    override fun onStartUp(route: Route?, arguments: Bundle?) {
     }
 }

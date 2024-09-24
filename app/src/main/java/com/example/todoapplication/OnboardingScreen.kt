@@ -1,5 +1,6 @@
 package com.example.todoapplication
 
+import android.os.Bundle
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -26,16 +27,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.debduttapanda.j3lib.InterCom
+import com.debduttapanda.j3lib.WirelessViewModel
+import com.debduttapanda.j3lib.models.EventBusDescription
+import com.debduttapanda.j3lib.models.Route
 
 @Composable
-fun OnboardingScreen(navController: NavHostController) {
+fun OnboardingScreen() {
     var showOnboarding by rememberSaveable { mutableStateOf(true) }
+    val myViewModel: WirelessViewModel = viewModel()
     if(showOnboarding)
         OnboardingScreenLayout(onFinishOnboarding = { showOnboarding = false })
     else{
         LaunchedEffect(Unit) {
-            navController.navigate(Routes.DashBoardActivity)
+            myViewModel.navigation {
+                navigate(Routes.DashBoardActivity.full)
+
+            }
         }
     }
 }
@@ -101,3 +111,23 @@ fun OnboardingScreenLayout(onFinishOnboarding: () -> Unit) {
             }
         }
     }
+
+
+
+class OnboardingScreenViewModel: WirelessViewModel(){
+    override fun eventBusDescription(): EventBusDescription? {
+        return null
+    }
+
+    override fun interCom(message: InterCom) {
+    }
+
+    override fun onBack() {
+    }
+
+    override fun onNotification(id: Any?, arg: Any?) {
+    }
+
+    override fun onStartUp(route: Route?, arguments: Bundle?) {
+    }
+}

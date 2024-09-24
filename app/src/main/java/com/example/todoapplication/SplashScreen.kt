@@ -1,6 +1,6 @@
 package com.example.todoapplication
 
-import android.content.Context
+import android.os.Bundle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,31 +20,27 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.example.todoapplication.PreferenceKeys.IS_FIRST_OPEN
+import com.debduttapanda.j3lib.InterCom
+import com.debduttapanda.j3lib.WirelessViewModel
+import com.debduttapanda.j3lib.models.EventBusDescription
+import com.debduttapanda.j3lib.models.Route
 import com.example.todoapplication.PreferenceKeys.IS_LOGGED_IN
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 @Composable
-fun SplashScreen(navController:NavController){
-    SplashScreenLayout(navController)
+fun SplashScreen(){
+    val myViewModel: WirelessViewModel = viewModel()
+    SplashScreenLayout(myViewModel)
 }
 
 @Composable
-private fun SplashScreenLayout(navController: NavController) {
+private fun SplashScreenLayout(myViewModel: WirelessViewModel) {
 
 
     val context= LocalContext.current
@@ -67,14 +63,15 @@ private fun SplashScreenLayout(navController: NavController) {
         delay(5*1000)
 
         if(!isLoggedIn) {
-            navController.navigate(Routes.LoginActivity)
+            myViewModel.navigation {
+                navigate(Routes.LoginActivity.full)
+            }
         }
         else{
-            navController.navigate(Routes.DashBoardActivity)
+            myViewModel.navigation {
+                navigate(Routes.DashBoardActivity.full)
+            }
         }
-
-
-
     }
 }
 
@@ -101,3 +98,21 @@ fun AnimatedPreloader(modifier: Modifier = Modifier.fillMaxWidth().background(co
     )
 }
 
+
+class SplashScreenViewModel: WirelessViewModel(){
+    override fun eventBusDescription(): EventBusDescription? {
+        return null
+    }
+
+    override fun interCom(message: InterCom) {
+    }
+
+    override fun onBack() {
+    }
+
+    override fun onNotification(id: Any?, arg: Any?) {
+    }
+
+    override fun onStartUp(route: Route?, arguments: Bundle?) {
+    }
+}

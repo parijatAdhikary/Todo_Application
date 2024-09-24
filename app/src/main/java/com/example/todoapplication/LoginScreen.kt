@@ -2,6 +2,7 @@ package com.example.todoapplication
 
 import android.app.Activity
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColorAsState
@@ -71,7 +72,12 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.debduttapanda.j3lib.InterCom
+import com.debduttapanda.j3lib.WirelessViewModel
+import com.debduttapanda.j3lib.models.EventBusDescription
+import com.debduttapanda.j3lib.models.Route
 import com.example.todoapplication.PreferenceKeys.IS_FIRST_OPEN
 import com.example.todoapplication.PreferenceKeys.IS_LOGGED_IN
 import kotlinx.coroutines.flow.Flow
@@ -80,10 +86,11 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen() {
     val coroutineScope = rememberCoroutineScope()
     val context=LocalContext.current
     val activity = LocalContext.current as? Activity
+    val myViewModel: WirelessViewModel = viewModel()
     BackHandler {
         activity?.finish()
     }
@@ -250,10 +257,15 @@ fun LoginScreen(navController: NavController) {
                         savePreference(true,context, IS_LOGGED_IN)
                         savePreference(true,context, IS_FIRST_OPEN)
                     }
-                    navController.navigate(Routes.OnboardingActivity)
+
+                    myViewModel.navigation {
+                        navigate(Routes.OnboardingActivity.full)
+                    }
                 }
                 else{
-                    navController.navigate(Routes.DashBoardActivity)
+                    myViewModel.navigation {
+                        navigate(Routes.DashBoardActivity.full)
+                    }
                 }
             },
             colors = ButtonDefaults.buttonColors(
@@ -699,3 +711,23 @@ fun getColorWithDelay(isFocused: Boolean, startColor: Int, endColor: Int): Color
     return newColor
 }
 
+
+
+
+class LoginScreenViewModel: WirelessViewModel(){
+    override fun eventBusDescription(): EventBusDescription? {
+        return null
+    }
+
+    override fun interCom(message: InterCom) {
+    }
+
+    override fun onBack() {
+    }
+
+    override fun onNotification(id: Any?, arg: Any?) {
+    }
+
+    override fun onStartUp(route: Route?, arguments: Bundle?) {
+    }
+}

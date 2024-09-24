@@ -33,11 +33,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -99,6 +99,11 @@ dependencies {
     // For Jetpack Compose
     implementation ("androidx.compose.ui:ui:1.3.0")
     implementation ("androidx.compose.material3:material3:1.0.0")
+
+    implementation("com.github.Debdutta-Panda:J3:1.1.34")
+
+    val nav_version = "2.7.5"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 
 
 }
