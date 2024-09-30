@@ -1,5 +1,5 @@
 package com.example.todoapplication.data.source
 
-interface SomeRepository {
+interface SomeRepositoryInterface {
     fun fetchData(): String
 }

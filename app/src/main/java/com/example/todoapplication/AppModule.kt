@@ -1,6 +1,5 @@
 package com.example.todoapplication
-
-import com.example.todoapplication.data.repositoryimplement.SomeRepository
+import com.example.todoapplication.data.repositoryimplement.SomeRepositoryImplement
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +12,7 @@ object AppModule {
 
     @Provides
     @ViewModelScoped
-    fun provideSomeRepository(): SomeRepository {
-        return SomeRepository()
+    fun provideSomeRepository(): SomeRepositoryImplement {
+        return SomeRepositoryImplement()
     }
 }
