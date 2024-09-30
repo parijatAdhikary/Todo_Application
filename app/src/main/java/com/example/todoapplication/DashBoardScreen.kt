@@ -58,8 +58,11 @@ import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.YearMonth
 import java.util.Calendar
+import javax.inject.Inject
+
 var taskDate=1
 var taskMonth=1
 var taskYear=1
@@ -686,8 +689,8 @@ fun daysInMonth(): Int {
 
 
 
-
-class DashBoardViewModel: WirelessViewModel(){
+@HiltViewModel
+class DashBoardViewModel @Inject constructor(): WirelessViewModel(){
     override fun eventBusDescription(): EventBusDescription? {
         return null
     }
@@ -696,6 +699,7 @@ class DashBoardViewModel: WirelessViewModel(){
     }
 
     override fun onBack() {
+        finish()
     }
 
     override fun onNotification(id: Any?, arg: Any?) {

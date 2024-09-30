@@ -80,9 +80,11 @@ import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
 import com.example.todoapplication.PreferenceKeys.IS_FIRST_OPEN
 import com.example.todoapplication.PreferenceKeys.IS_LOGGED_IN
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -714,7 +716,9 @@ fun getColorWithDelay(isFocused: Boolean, startColor: Int, endColor: Int): Color
 
 
 
-class LoginScreenViewModel: WirelessViewModel(){
+
+@HiltViewModel
+class LoginScreenViewModel @Inject constructor(): WirelessViewModel(){
     override fun eventBusDescription(): EventBusDescription? {
         return null
     }

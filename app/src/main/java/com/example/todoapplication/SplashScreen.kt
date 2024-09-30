@@ -31,7 +31,9 @@ import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
 import com.example.todoapplication.PreferenceKeys.IS_LOGGED_IN
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
 @Composable
 fun SplashScreen(){
@@ -99,7 +101,9 @@ fun AnimatedPreloader(modifier: Modifier = Modifier.fillMaxWidth().background(co
 }
 
 
-class SplashScreenViewModel: WirelessViewModel(){
+
+@HiltViewModel
+class SplashScreenViewModel @Inject constructor(): WirelessViewModel(){
     override fun eventBusDescription(): EventBusDescription? {
         return null
     }

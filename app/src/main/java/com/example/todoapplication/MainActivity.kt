@@ -16,7 +16,8 @@ import com.debduttapanda.j3lib.arguments
 import com.debduttapanda.j3lib.models.Route
 import com.debduttapanda.j3lib.wvm
 import com.example.todoapplication.Routes.LoginActivity
-
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

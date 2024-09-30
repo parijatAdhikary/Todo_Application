@@ -2,7 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 
-    kotlin("kapt")
+
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+
 
 }
 
@@ -105,5 +108,12 @@ dependencies {
     val nav_version = "2.7.5"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+}
 
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }

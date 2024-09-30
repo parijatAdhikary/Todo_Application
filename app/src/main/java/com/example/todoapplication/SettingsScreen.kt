@@ -21,6 +21,8 @@ import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 @Composable
 fun SettingsScreen() {
@@ -47,7 +49,9 @@ fun ToggleSwitch() {
 }
 
 
-class SettingsScreenViewModel: WirelessViewModel(){
+
+@HiltViewModel
+class SettingsScreenViewModel @Inject constructor(): WirelessViewModel(){
     override fun eventBusDescription(): EventBusDescription? {
         return null
     }
