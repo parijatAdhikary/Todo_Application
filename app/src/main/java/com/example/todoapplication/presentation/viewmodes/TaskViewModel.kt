@@ -5,10 +5,10 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todoapplication.Task
-import com.example.todoapplication.data.repositoryimplement.TaskRepositoryImplement
+import com.example.todoapplication.data.repositoryimplement.TaskRepositoryImpl
 import kotlinx.coroutines.launch
 
-class TaskViewModel(private val repository: TaskRepositoryImplement) : ViewModel() {
+class TaskViewModel(private val repository: TaskRepositoryImpl) : ViewModel() {
     var tasks = mutableStateListOf<Task>()
 
     init {

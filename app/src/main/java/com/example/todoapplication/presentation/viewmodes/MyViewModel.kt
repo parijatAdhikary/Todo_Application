@@ -5,13 +5,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.todoapplication.data.repositoryimplement.SomeRepositoryImplement
+import com.example.todoapplication.data.source.SomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MyViewModel @Inject constructor(
-    private val repository: SomeRepositoryImplement
+    private val repository: SomeRepository
 ) : ViewModel() {
 
     private val _data = MutableLiveData<String>()

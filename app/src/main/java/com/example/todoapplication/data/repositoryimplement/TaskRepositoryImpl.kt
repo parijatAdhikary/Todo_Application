@@ -2,12 +2,14 @@ package com.example.todoapplication.data.repositoryimplement
 
 import com.example.todoapplication.Task
 import com.example.todoapplication.TaskDao
-import com.example.todoapplication.data.source.TaskRepositoryInterface
+import com.example.todoapplication.data.source.TaskRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-class TaskRepositoryImplement (private val taskDao: TaskDao) : TaskRepositoryInterface {
+class TaskRepositoryImpl @Inject constructor(private val taskDao: TaskDao) : TaskRepository {
+
     override suspend fun insert(task: Task) {
         withContext(Dispatchers.IO) {
             taskDao.insert(task)
