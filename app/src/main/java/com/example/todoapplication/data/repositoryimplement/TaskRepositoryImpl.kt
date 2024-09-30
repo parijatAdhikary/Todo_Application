@@ -15,17 +15,19 @@ class TaskRepositoryImpl @Inject constructor(private val taskDao: TaskDao) : Tas
             taskDao.insert(task)
         }
     }
+
     override suspend fun getAllTasks(): List<Task> {
         return withContext(Dispatchers.IO) {
             taskDao.getAllTasks()
         }
     }
+
     override suspend fun deleteTaskById(taskId: Long) {
         taskDao.deleteTaskById(taskId)
     }
 
     override suspend fun updateTaskById(taskId: Long, taskName: String, taskDate: String) {
-        taskDao.updateTaskById(taskId,taskName,taskDate)
+        taskDao.updateTaskById(taskId, taskName, taskDate)
     }
 
 }

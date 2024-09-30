@@ -1,8 +1,7 @@
 package com.example.todoapplication
+
 import com.example.todoapplication.data.repositoryimplement.SomeRepositoryImpl
-import com.example.todoapplication.data.repositoryimplement.TaskRepositoryImpl
 import com.example.todoapplication.data.source.SomeRepository
-import com.example.todoapplication.data.source.TaskRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

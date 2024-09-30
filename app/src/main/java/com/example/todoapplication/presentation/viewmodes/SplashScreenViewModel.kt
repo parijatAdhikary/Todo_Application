@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class SplashScreenViewModel @Inject constructor(): WirelessViewModel(){
+class SplashScreenViewModel @Inject constructor() : WirelessViewModel() {
     override fun eventBusDescription(): EventBusDescription? {
         return null
     }

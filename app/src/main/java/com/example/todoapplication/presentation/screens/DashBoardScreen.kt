@@ -65,9 +65,9 @@ import com.example.todoapplication.presentation.viewmodes.TaskViewModel
 import java.time.YearMonth
 import java.util.Calendar
 
-var taskDate=1
-var taskMonth=1
-var taskYear=1
+var taskDate = 1
+var taskMonth = 1
+var taskYear = 1
 
 @Composable
 fun DashBoardScreenLayout() {
@@ -100,7 +100,7 @@ fun DashBoardLayout(myViewModel: WirelessViewModel) {
     var taskName by remember { mutableStateOf("") }
     var selectedDate by remember { mutableStateOf("Select your task date") }
     var isPopUpShowing = remember { mutableStateOf(false) }
-    var context=LocalContext.current
+    var context = LocalContext.current
 
 
 
@@ -123,10 +123,10 @@ fun DashBoardLayout(myViewModel: WirelessViewModel) {
                 fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Right,
                 fontSize = 22.sp,
-                color = colorResource(R.color.color_000b11), modifier = Modifier.padding(12.dp)
+                color = colorResource(R.color.color_000b11),
+                modifier = Modifier.padding(12.dp)
             )
-            Image(
-                painter = painterResource(R.drawable.round_settings_24),
+            Image(painter = painterResource(R.drawable.round_settings_24),
                 contentDescription = "Content description for visually impaired",
                 modifier = Modifier
                     .wrapContentSize()
@@ -134,16 +134,14 @@ fun DashBoardLayout(myViewModel: WirelessViewModel) {
                         myViewModel.navigation {
                             navigate(Routes.SettingsScreen.full)
                         }
-                    }
-            )
+                    })
         }
         Row(
             Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Image(
-                painter = painterResource(R.drawable.round_arrow_back_24),
+            Image(painter = painterResource(R.drawable.round_arrow_back_24),
                 contentDescription = "Content description for visually impaired",
                 modifier = Modifier
                     .wrapContentSize()
@@ -153,10 +151,8 @@ fun DashBoardLayout(myViewModel: WirelessViewModel) {
                                 .of(year, month.value - 1)
                                 .lengthOfMonth()
                             month = month.minus(1)
-                        } else
-                            date--
-                    }
-            )
+                        } else date--
+                    })
 
             Text(
                 "$date $month $year",
@@ -164,10 +160,10 @@ fun DashBoardLayout(myViewModel: WirelessViewModel) {
                 fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Right,
                 fontSize = 18.sp,
-                color = colorResource(R.color.color_000b11), modifier = Modifier.padding(12.dp)
+                color = colorResource(R.color.color_000b11),
+                modifier = Modifier.padding(12.dp)
             )
-            Image(
-                painter = painterResource(R.drawable.round_arrow_forward_24),
+            Image(painter = painterResource(R.drawable.round_arrow_forward_24),
                 contentDescription = "Content description for visually impaired",
                 modifier = Modifier
                     .wrapContentSize()
@@ -178,10 +174,8 @@ fun DashBoardLayout(myViewModel: WirelessViewModel) {
                         ) {
                             month = month.plus(1)
                             date = 1
-                        } else
-                            date++
-                    }
-            )
+                        } else date++
+                    })
         }
 
 
@@ -192,128 +186,126 @@ fun DashBoardLayout(myViewModel: WirelessViewModel) {
             LazyColumn(
                 Modifier
                     .fillMaxWidth()
-                    .padding(top = 70.dp)) {
+                    .padding(top = 70.dp)
+            ) {
                 Log.d("SIZETAG", "DashBoardLayout:${viewModel.tasks.size}")
                 items(viewModel.tasks) { task ->
-                    TaskItem(viewModel,task)
+                    TaskItem(viewModel, task)
                 }
             }
-            Button(onClick = {
-                isPopUpShowing.value=true
-            },
+            Button(
+                onClick = {
+                    isPopUpShowing.value = true
+                },
                 Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp)) {
+                    .padding(top = 12.dp)
+            ) {
                 Text("Add your task")
             }
 
 
 
 
-                if (isDatePickerShowing.value) {
-                    val calendar = Calendar.getInstance()
-                    val year = calendar.get(Calendar.YEAR)
-                    val month = calendar.get(Calendar.MONTH)
-                    val day = calendar.get(Calendar.DAY_OF_MONTH)
-                    android.app.DatePickerDialog(
-                        LocalContext.current,
-                        { _, year, month, dayOfMonth ->
-                            selectedDate = "${dayOfMonth}_${month + 1}_$year"
-                        }, year, month, day
-                    ).show()
-                    isDatePickerShowing.value = false
-                }
+            if (isDatePickerShowing.value) {
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH)
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+                android.app.DatePickerDialog(
+                    LocalContext.current, { _, year, month, dayOfMonth ->
+                        selectedDate = "${dayOfMonth}_${month + 1}_$year"
+                    }, year, month, day
+                ).show()
+                isDatePickerShowing.value = false
+            }
 
-                val keyboardController = LocalSoftwareKeyboardController.current
+            val keyboardController = LocalSoftwareKeyboardController.current
 
-                if(isPopUpShowing.value){
-                    Dialog(onDismissRequest = { isPopUpShowing.value = false }) {
-                        Surface(
-                            shape = MaterialTheme.shapes.medium,
-                            tonalElevation = 8.dp,
+            if (isPopUpShowing.value) {
+                Dialog(onDismissRequest = { isPopUpShowing.value = false }) {
+                    Surface(
+                        shape = MaterialTheme.shapes.medium,
+                        tonalElevation = 8.dp,
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .background(Color.Transparent)
+                    ) {
+
+                        Box(
                             modifier = Modifier
+                                .width(350.dp)
+                                .background(Color.White, shape = RoundedCornerShape(12.dp))
                                 .padding(16.dp)
-                                .background(Color.Transparent)
                         ) {
-
-                            Box(
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Top,
                                 modifier = Modifier
-                                    .width(350.dp)
-                                    .background(Color.White, shape = RoundedCornerShape(12.dp))
-                                    .padding(16.dp)
+                                    .fillMaxWidth()
+                                    .background(
+                                        colorResource(R.color.white)
+                                    )
                             ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.Top,
+
+                                Text(
+                                    "Add New Task",
+                                    fontWeight = FontWeight.W700,
+                                    fontFamily = FontFamily.SansSerif,
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 20.sp,
+                                    color = colorResource(R.color.black),
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                                Spacer(Modifier.height(20.dp))
+
+                                TextField(value = taskName,
+                                    onValueChange = { taskName = it },
+                                    label = { Text("Task Name") },
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .background(
-                                            colorResource(R.color.white)
-                                        )
-                                ) {
+                                        .onFocusChanged {
+                                            keyboardController?.show()
+                                        })
 
-                                    Text("Add New Task",
-                                        fontWeight = FontWeight.W700,
-                                        fontFamily = FontFamily.SansSerif,
-                                        textAlign = TextAlign.Center,
-                                        fontSize = 20.sp,
-                                        color = colorResource(R.color.black),
-                                        modifier = Modifier.fillMaxWidth())
-                                    Spacer(Modifier.height(20.dp))
+                                Text(selectedDate,
+                                    fontWeight = FontWeight.W800,
+                                    fontFamily = FontFamily.SansSerif,
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 16.sp,
+                                    color = colorResource(R.color.color_1d1e20),
+                                    modifier = Modifier
+                                        .padding(0.dp, 16.dp)
+                                        .fillMaxWidth()
+                                        .clickable {
+                                            isDatePickerShowing.value = true
+                                        })
 
-                                    TextField(
-                                        value = taskName,
-                                        onValueChange = { taskName = it },
-                                        label = { Text("Task Name") }, modifier = Modifier
-                                            .fillMaxWidth()
-                                            .onFocusChanged {
-                                                keyboardController?.show()
-                                            }
-                                    )
-
-                                    Text(selectedDate,
-                                        fontWeight = FontWeight.W800,
-                                        fontFamily = FontFamily.SansSerif,
-                                        textAlign = TextAlign.Center,
-                                        fontSize = 16.sp,
-                                        color = colorResource(R.color.color_1d1e20),
-                                        modifier = Modifier
-                                            .padding(0.dp, 16.dp)
-                                            .fillMaxWidth()
-                                            .clickable {
-                                                isDatePickerShowing.value = true
-                                            }
-                                    )
-
-                                    Button(onClick = {
-                                        if (taskName.isNotBlank() && selectedDate.length <= 10) {
-                                            viewModel.addTask(
-                                                Task(
-                                                    todolist = taskName,
-                                                    date = selectedDate
-                                                )
+                                Button(onClick = {
+                                    if (taskName.isNotBlank() && selectedDate.length <= 10) {
+                                        viewModel.addTask(
+                                            Task(
+                                                todolist = taskName, date = selectedDate
                                             )
-                                            taskName = ""
-                                            selectedDate = "Select your task date"
-                                            isPopUpShowing.value = false
-                                        } else
-                                            Toast.makeText(
-                                                context,
-                                                "Please select a date and write your task",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                    }, modifier = Modifier.fillMaxWidth()) {
-                                        Text("Add")
-                                    }
-
-                                    Spacer(modifier = Modifier.height(16.dp))
+                                        )
+                                        taskName = ""
+                                        selectedDate = "Select your task date"
+                                        isPopUpShowing.value = false
+                                    } else Toast.makeText(
+                                        context,
+                                        "Please select a date and write your task",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }, modifier = Modifier.fillMaxWidth()) {
+                                    Text("Add")
                                 }
+
+                                Spacer(modifier = Modifier.height(16.dp))
                             }
                         }
                     }
                 }
-
-
+            }
 
 
         }
@@ -334,39 +326,30 @@ fun AlertDialogExample(
 
         title = {
             Text(text = dialogTitle)
-        },
-        text = {
+        }, text = {
             Text(text = dialogText)
-        },
-        onDismissRequest = {
+        }, onDismissRequest = {
             onDismissRequest()
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onConfirmation()
-                }
-            ) {
+        }, confirmButton = {
+            TextButton(onClick = {
+                onConfirmation()
+            }) {
                 Text(text = dialogPositive)
             }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = {
-                    onDismissRequest()
-                }
-            ) {
+        }, dismissButton = {
+            TextButton(onClick = {
+                onDismissRequest()
+            }) {
                 Text(text = dialogNegative)
             }
-        }
-    )
+        })
 }
 
 @Composable
 fun TaskItem(viewModel: TaskViewModel, task: Task) {
 
     var context = LocalContext.current
-    val filterDate="${taskDate}_${taskMonth}_$taskYear"
+    val filterDate = "${taskDate}_${taskMonth}_$taskYear"
 
 
     val openDeleteDialog = remember { mutableStateOf(false) }
@@ -378,33 +361,35 @@ fun TaskItem(viewModel: TaskViewModel, task: Task) {
     var isPopUpShowing = remember { mutableStateOf(false) }
 
 
-    if(task.date.contentEquals(filterDate)) {
-        Row(Modifier.fillMaxWidth().padding(0.dp,8.dp)
-            .pointerInput(Unit) {
-            detectTapGestures(
-                onLongPress = {
-                    openEditDialog.value=true
-                }
-            )
-        },
+    if (task.date.contentEquals(filterDate)) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 8.dp)
+                .pointerInput(Unit) {
+                    detectTapGestures(onLongPress = {
+                        openEditDialog.value = true
+                    })
+                },
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(task.todolist,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                task.todolist,
                 fontWeight = FontWeight.W700,
                 fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Left,
                 fontSize = 16.sp,
-                color = colorResource(R.color.black))
+                color = colorResource(R.color.black)
+            )
 
-            Image(
-                painter = painterResource(R.drawable.outline_delete_24),
+            Image(painter = painterResource(R.drawable.outline_delete_24),
                 contentDescription = "Delete",
                 modifier = Modifier
                     .wrapContentSize()
                     .clickable {
-                        openDeleteDialog.value=true
-                    }
-            )
+                        openDeleteDialog.value = true
+                    })
         }
         Divider(modifier = Modifier.padding(vertical = 2.dp))
     }
@@ -416,8 +401,7 @@ fun TaskItem(viewModel: TaskViewModel, task: Task) {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         android.app.DatePickerDialog(
-            LocalContext.current,
-            { _, year, month, dayOfMonth ->
+            LocalContext.current, { _, year, month, dayOfMonth ->
                 updatedDate = "${dayOfMonth}_${month + 1}_$year"
             }, year, month, day
         ).show()
@@ -426,7 +410,7 @@ fun TaskItem(viewModel: TaskViewModel, task: Task) {
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    if(isPopUpShowing.value){
+    if (isPopUpShowing.value) {
         Dialog(onDismissRequest = { isPopUpShowing.value = false }) {
             Surface(
                 shape = MaterialTheme.shapes.medium,
@@ -451,24 +435,25 @@ fun TaskItem(viewModel: TaskViewModel, task: Task) {
                                 colorResource(R.color.white)
                             )
                     ) {
-                        Text("Edit Existing Task",
+                        Text(
+                            "Edit Existing Task",
                             fontWeight = FontWeight.W700,
                             fontFamily = FontFamily.SansSerif,
                             textAlign = TextAlign.Center,
                             fontSize = 20.sp,
                             color = colorResource(R.color.black),
-                            modifier = Modifier.fillMaxWidth())
+                            modifier = Modifier.fillMaxWidth()
+                        )
                         Spacer(Modifier.height(20.dp))
 
-                        TextField(
-                            value = updatedTaskName,
+                        TextField(value = updatedTaskName,
                             onValueChange = { updatedTaskName = it },
-                            label = { Text("Task Name") }, modifier = Modifier
+                            label = { Text("Task Name") },
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .onFocusChanged {
                                     keyboardController?.show()
-                                }
-                        )
+                                })
 
                         Text(updatedDate,
                             fontWeight = FontWeight.W800,
@@ -481,21 +466,19 @@ fun TaskItem(viewModel: TaskViewModel, task: Task) {
                                 .fillMaxWidth()
                                 .clickable {
                                     isDatePickerShowing.value = true
-                                }
-                        )
+                                })
 
                         Button(onClick = {
                             if (updatedTaskName.isNotBlank() && updatedDate.length <= 10) {
-                                viewModel.editTask(taskId = task.id,updatedTaskName,updatedDate)
+                                viewModel.editTask(taskId = task.id, updatedTaskName, updatedDate)
                                 updatedTaskName = ""
                                 updatedDate = "Select your task date"
                                 isPopUpShowing.value = false
-                            } else
-                                Toast.makeText(
-                                    context,
-                                    "Please select a date and write your task",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                            } else Toast.makeText(
+                                context,
+                                "Please select a date and write your task",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }, modifier = Modifier.fillMaxWidth()) {
                             Text("Add")
                         }
@@ -507,11 +490,10 @@ fun TaskItem(viewModel: TaskViewModel, task: Task) {
         }
     }
 
-    if(openDeleteDialog.value){
-        AlertDialogExample(
-            onDismissRequest = {
-                openDeleteDialog.value = false
-            },
+    if (openDeleteDialog.value) {
+        AlertDialogExample(onDismissRequest = {
+            openDeleteDialog.value = false
+        },
             onConfirmation = {
                 viewModel.deleteTask(taskId = task.id)
                 openDeleteDialog.value = false
@@ -522,15 +504,14 @@ fun TaskItem(viewModel: TaskViewModel, task: Task) {
             dialogNegative = "Cancel"
         )
     }
-    if(openEditDialog.value){
-        AlertDialogExample(
-            onDismissRequest = {
-                openEditDialog.value = false
-            },
+    if (openEditDialog.value) {
+        AlertDialogExample(onDismissRequest = {
+            openEditDialog.value = false
+        },
             onConfirmation = {
-                isPopUpShowing.value=true
-                updatedTaskName=task.todolist
-                updatedDate=task.date
+                isPopUpShowing.value = true
+                updatedTaskName = task.todolist
+                updatedDate = task.date
                 openEditDialog.value = false
             },
             dialogTitle = "Edit Confirmation",
@@ -544,70 +525,91 @@ fun TaskItem(viewModel: TaskViewModel, task: Task) {
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun monthView() {
-    val context=LocalContext.current
+    val context = LocalContext.current
     Column(
         Modifier
             .background(colorResource(R.color.white))
             .padding(30.dp, 40.dp)
-            .fillMaxSize(), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
-            Text("Month View",
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                "Month View",
                 fontWeight = FontWeight.W800,
                 fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Right,
                 fontSize = 18.sp,
-                color = colorResource(R.color.color_000b11), modifier = Modifier.padding(12.dp))
-            Image(
-                painter = painterResource(R.drawable.round_settings_24),
+                color = colorResource(R.color.color_000b11),
+                modifier = Modifier.padding(12.dp)
+            )
+            Image(painter = painterResource(R.drawable.round_settings_24),
                 contentDescription = "Content description for visually impaired",
                 modifier = Modifier
                     .wrapContentSize()
                     .clickable {
                         //Settings click
-                    }
-            )
+                    })
         }
         Spacer(modifier = Modifier.height(24.dp))
-        Text("September - 2024",
+        Text(
+            "September - 2024",
             fontWeight = FontWeight.W800,
             fontFamily = FontFamily.SansSerif,
             textAlign = TextAlign.Right,
             fontSize = 22.sp,
-            color = colorResource(R.color.color_000b11))
+            color = colorResource(R.color.color_000b11)
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
-            val days = arrayOf( "Mo", "Tu", "We", "Th", "Fr", "Sa","Su")
-            for(day in days){
-                Text(day,
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            val days = arrayOf("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")
+            for (day in days) {
+                Text(
+                    day,
                     fontWeight = FontWeight.W800,
                     fontFamily = FontFamily.SansSerif,
                     textAlign = TextAlign.Center,
                     fontSize = 16.sp,
                     color = colorResource(R.color.color_000b11),
-                    modifier = Modifier.width(36.dp))
+                    modifier = Modifier.width(36.dp)
+                )
 
             }
         }
-        var totalDaysInThisMonth= daysInMonth()
-        var firstDayNo= firstDayOfMonth()
+        var totalDaysInThisMonth = daysInMonth()
+        var firstDayNo = firstDayOfMonth()
         val currentDate = LocalDate.now()
-        val todayDate =currentDate.dayOfMonth
+        val todayDate = currentDate.dayOfMonth
         Log.d("DayTAG", "totalDaysInThisMonth: $totalDaysInThisMonth")
-        var dayCount=1
+        var dayCount = 1
 
-        val month =currentDate.monthValue
+        val month = currentDate.monthValue
         val year = currentDate.year
 
 
-        for(weekCount in 1..6){
-            if(dayCount<=totalDaysInThisMonth){
+        for (weekCount in 1..6) {
+            if (dayCount <= totalDaysInThisMonth) {
                 Spacer(modifier = Modifier.height(12.dp))
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
+                Row(
+                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
 
-                    for(day in 1..7){
-                        if((weekCount==1&&firstDayNo>day)||(dayCount>totalDaysInThisMonth)){
-                            Text("",
+                    for (day in 1..7) {
+                        if ((weekCount == 1 && firstDayNo > day) || (dayCount > totalDaysInThisMonth)) {
+                            Text(
+                                "",
                                 fontWeight = FontWeight.W500,
                                 fontFamily = FontFamily.SansSerif,
                                 textAlign = TextAlign.Center,
@@ -615,13 +617,12 @@ fun monthView() {
                                 color = colorResource(R.color.color_000b11),
                                 modifier = Modifier
                                     .width(36.dp)
-                                    .padding(0.dp, 10.dp))
+                                    .padding(0.dp, 10.dp)
+                            )
 
-                        }
-                        else {
-                            if(todayDate==dayCount){
-                                Text(
-                                    "$dayCount",
+                        } else {
+                            if (todayDate == dayCount) {
+                                Text("$dayCount",
                                     fontWeight = FontWeight.W500,
                                     fontFamily = FontFamily.SansSerif,
                                     textAlign = TextAlign.Center,
@@ -642,10 +643,8 @@ fun monthView() {
                                                     Toast.LENGTH_SHORT
                                                 )
                                                 .show()
-                                        }
-                                )
-                            }
-                            else{
+                                        })
+                            } else {
                                 Text(
                                     "$dayCount",
                                     fontWeight = FontWeight.W500,
@@ -655,7 +654,8 @@ fun monthView() {
                                     color = colorResource(R.color.color_000b11),
                                     modifier = Modifier
                                         .width(36.dp)
-                                        .padding(0.dp, 10.dp))
+                                        .padding(0.dp, 10.dp)
+                                )
                             }
 
                             dayCount++
@@ -668,12 +668,11 @@ fun monthView() {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun firstDayOfMonth(): Int{
+fun firstDayOfMonth(): Int {
     val currentDate = LocalDate.now()
-    val month =currentDate.monthValue
-    var monthString=""
-    if(month<10)
-        monthString="0$month"
+    val month = currentDate.monthValue
+    var monthString = ""
+    if (month < 10) monthString = "0$month"
     val year = currentDate.year
     val dateString = "$year-$monthString-01"
     val date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE)
@@ -684,7 +683,7 @@ fun firstDayOfMonth(): Int{
 @RequiresApi(Build.VERSION_CODES.O)
 fun daysInMonth(): Int {
     val currentDate = LocalDate.now()
-    val month =currentDate.month
+    val month = currentDate.month
     val year = currentDate.year
     return LocalDate.of(year, month, 1).lengthOfMonth()
 }

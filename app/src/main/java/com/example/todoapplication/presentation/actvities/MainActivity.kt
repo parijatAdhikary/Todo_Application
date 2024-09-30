@@ -13,6 +13,7 @@ import com.example.todoapplication.Routes
 import com.example.todoapplication.presentation.screens.*
 import com.example.todoapplication.presentation.viewmodes.*
 import dagger.hilt.android.AndroidEntryPoint
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,42 +30,31 @@ class MainActivity : ComponentActivity() {
         val navController = rememberNavController()
 
         NavHost(
-            navController = navController,
-            startDestination = Routes.SplashScreen.full
+            navController = navController, startDestination = Routes.SplashScreen.full
         ) {
-            MyScreen(
-                navController,
+            MyScreen(navController,
                 Routes.SplashScreen,
-                wirelessViewModel = { wvm<SplashScreenViewModel>() }
-            ) {
+                wirelessViewModel = { wvm<SplashScreenViewModel>() }) {
                 SplashScreen()
             }
-            MyScreen(
-                navController,
+            MyScreen(navController,
                 Routes.DashBoardActivity,
-                wirelessViewModel = { wvm<DashBoardViewModel>() }
-            ) {
+                wirelessViewModel = { wvm<DashBoardViewModel>() }) {
                 DashBoardScreenLayout()
             }
-            MyScreen(
-                navController,
+            MyScreen(navController,
                 Routes.LoginActivity,
-                wirelessViewModel = { wvm<LoginScreenViewModel>() }
-            ) {
+                wirelessViewModel = { wvm<LoginScreenViewModel>() }) {
                 LoginScreen()
             }
-            MyScreen(
-                navController,
+            MyScreen(navController,
                 Routes.OnboardingActivity,
-                wirelessViewModel = { wvm<OnboardingScreenViewModel>() }
-            ) {
+                wirelessViewModel = { wvm<OnboardingScreenViewModel>() }) {
                 OnboardingScreen()
             }
-            MyScreen(
-                navController,
+            MyScreen(navController,
                 Routes.SettingsScreen,
-                wirelessViewModel = { wvm<SettingsScreenViewModel>() }
-            ) {
+                wirelessViewModel = { wvm<SettingsScreenViewModel>() }) {
                 SettingsScreen()
             }
 

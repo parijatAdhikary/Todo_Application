@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class OnboardingScreenViewModel @Inject constructor(): WirelessViewModel(){
+class OnboardingScreenViewModel @Inject constructor() : WirelessViewModel() {
     override fun eventBusDescription(): EventBusDescription? {
         return null
     }

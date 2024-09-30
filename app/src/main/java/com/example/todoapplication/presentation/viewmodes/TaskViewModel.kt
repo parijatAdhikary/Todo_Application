@@ -40,10 +40,10 @@ class TaskViewModel(private val repository: TaskRepositoryImpl) : ViewModel() {
         }
     }
 
-    fun editTask(taskId: Long,taskName: String,taskDate: String) {
+    fun editTask(taskId: Long, taskName: String, taskDate: String) {
         Log.d("testingTAG", "editTask: Called ")
         viewModelScope.launch {
-            repository.updateTaskById(taskId,taskName,taskDate)
+            repository.updateTaskById(taskId, taskName, taskDate)
             tasks.clear()
             tasks.addAll(repository.getAllTasks())
         }

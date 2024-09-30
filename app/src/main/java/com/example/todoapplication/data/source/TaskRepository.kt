@@ -1,7 +1,6 @@
 package com.example.todoapplication.data.source
 
 import com.example.todoapplication.Task
-import com.example.todoapplication.TaskDao
 
 interface TaskRepository {
     suspend fun insert(task: Task)

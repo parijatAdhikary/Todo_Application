@@ -91,7 +91,7 @@ import javax.inject.Inject
 @Composable
 fun LoginScreen() {
     val coroutineScope = rememberCoroutineScope()
-    val context=LocalContext.current
+    val context = LocalContext.current
     val activity = LocalContext.current as? Activity
     val myViewModel: WirelessViewModel = viewModel()
     BackHandler {
@@ -122,43 +122,63 @@ fun LoginScreen() {
             .fillMaxSize()
             .padding(20.dp, 0.dp)
             .verticalScroll(loginScrollState),
-        horizontalAlignment  =  Alignment.CenterHorizontally,){
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         Spacer(Modifier.height(100.dp))
-        Image(painter = painterResource(R.drawable.login_image),
+        Image(
+            painter = painterResource(R.drawable.login_image),
             contentDescription = "login page image",
-            modifier = Modifier.size(250.dp,200.dp)
+            modifier = Modifier.size(250.dp, 200.dp)
         )
-        Text("Welcome Back!",
+        Text(
+            "Welcome Back!",
             fontWeight = FontWeight.W700,
             fontFamily = FontFamily.SansSerif,
             textAlign = TextAlign.Center,
             fontSize = 30.sp,
             color = colorResource(R.color.black),
-            modifier = Modifier.fillMaxWidth())
+            modifier = Modifier.fillMaxWidth()
+        )
         Spacer(Modifier.height(8.dp))
-        Text("Log in to your existant account of Q Allure",
+        Text(
+            "Log in to your existant account of Q Allure",
             fontWeight = FontWeight.W400,
             fontFamily = FontFamily.SansSerif,
             textAlign = TextAlign.Center,
             fontSize = 16.sp,
             color = colorResource(R.color.color_898989),
-            modifier = Modifier.fillMaxWidth())
+            modifier = Modifier.fillMaxWidth()
+        )
         Spacer(Modifier.height(32.dp))
-        TextField(  modifier = Modifier
-            .fillMaxWidth()
-            .shadow(elevation = 40.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_CCCCCCCC))
-            .background(color = colorResource(R.color.white))
-            .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = getColorWithDelay(isEmailFocused, R.color.color_focus, R.color.white),
-                ),
-                shape = RoundedCornerShape(50)
-            )
-            .focusRequester(focusRequester)
-            .onFocusChanged { focusState -> isEmailFocused = focusState.isFocused },
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 40.dp,
+                    shape = RoundedCornerShape(50),
+                    spotColor = colorResource(R.color.color_CCCCCCCC)
+                )
+                .background(color = colorResource(R.color.white))
+                .border(
+                    BorderStroke(
+                        width = 1.dp,
+                        color = getColorWithDelay(
+                            isEmailFocused, R.color.color_focus, R.color.white
+                        ),
+                    ), shape = RoundedCornerShape(50)
+                )
+                .focusRequester(focusRequester)
+                .onFocusChanged { focusState -> isEmailFocused = focusState.isFocused },
             value = userEmail,
-            leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "personIcon", tint = getColorWithDelay(isEmailFocused, R.color.color_focus, R.color.color_non_focus)) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = "personIcon",
+                    tint = getColorWithDelay(
+                        isEmailFocused, R.color.color_focus, R.color.color_non_focus
+                    )
+                )
+            },
             /*colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
@@ -167,11 +187,12 @@ fun LoginScreen() {
              */
             textStyle = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Bold ,
+                fontWeight = FontWeight.Bold,
                 color = colorResource(if (isEmailFocused) R.color.color_focus else R.color.color_non_focus)
             ),
             placeholder = {
-                Text("User ID",
+                Text(
+                    "User ID",
                     fontWeight = FontWeight.W400,
                     fontFamily = FontFamily.SansSerif,
                     fontSize = 16.sp,
@@ -184,23 +205,36 @@ fun LoginScreen() {
         )
 
         Spacer(Modifier.height(20.dp))
-        TextField(  modifier = Modifier
-            .fillMaxWidth()
-            .shadow(elevation = 40.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_CCCCCCCC))
-            .background(color = colorResource(R.color.white))
-            .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = getColorWithDelay(isPasswordFocused, R.color.color_focus, R.color.white)
-                ),
-                shape = RoundedCornerShape(50)
-            )
-            .focusRequester(focusRequester)
-            .onFocusChanged { focusState ->
-                isPasswordFocused = focusState.isFocused
-            },
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 40.dp,
+                    shape = RoundedCornerShape(50),
+                    spotColor = colorResource(R.color.color_CCCCCCCC)
+                )
+                .background(color = colorResource(R.color.white))
+                .border(
+                    BorderStroke(
+                        width = 1.dp, color = getColorWithDelay(
+                            isPasswordFocused, R.color.color_focus, R.color.white
+                        )
+                    ), shape = RoundedCornerShape(50)
+                )
+                .focusRequester(focusRequester)
+                .onFocusChanged { focusState ->
+                    isPasswordFocused = focusState.isFocused
+                },
             value = userPassword,
-            leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "personIcon", tint =  getColorWithDelay(isPasswordFocused, R.color.color_focus, R.color.color_non_focus)) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = "personIcon",
+                    tint = getColorWithDelay(
+                        isPasswordFocused, R.color.color_focus, R.color.color_non_focus
+                    )
+                )
+            },
             visualTransformation = if (isLoginPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
                 val image = if (isLoginPasswordVisible) Icons.Filled.Check else Icons.Filled.Clear
@@ -221,11 +255,12 @@ fun LoginScreen() {
              */
             textStyle = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Bold ,
+                fontWeight = FontWeight.Bold,
                 color = colorResource(if (isPasswordFocused) R.color.color_focus else R.color.color_non_focus)
             ),
             placeholder = {
-                Text("Password",
+                Text(
+                    "Password",
                     fontWeight = FontWeight.W400,
                     fontFamily = FontFamily.SansSerif,
                     fontSize = 16.sp,
@@ -239,15 +274,20 @@ fun LoginScreen() {
 
         Spacer(Modifier.height(12.dp))
 
-        Box(modifier = Modifier.fillMaxWidth().align(Alignment.End) ){
-            Text("Forgot Password?",
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.End)
+        ) {
+            Text(
+                "Forgot Password?",
                 fontWeight = FontWeight.W500,
                 fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Right,
                 fontSize = 14.sp,
                 color = colorResource(R.color.color_000b11),
-                modifier = Modifier.clickable(onClick = {
-                }))
+                modifier = Modifier.clickable(onClick = {})
+            )
         }
 
 
@@ -255,38 +295,37 @@ fun LoginScreen() {
         Button(
             onClick = {
                 Log.d("StatusTAG", "OnBoardActivity: $isFirstOpen")
-                if(!isFirstOpen) {
+                if (!isFirstOpen) {
                     coroutineScope.launch {
-                        savePreference(true,context, IS_LOGGED_IN)
-                        savePreference(true,context, IS_FIRST_OPEN)
+                        savePreference(true, context, IS_LOGGED_IN)
+                        savePreference(true, context, IS_FIRST_OPEN)
                     }
 
                     myViewModel.navigation {
                         navigate(Routes.OnboardingActivity.full)
                     }
-                }
-                else{
+                } else {
                     myViewModel.navigation {
                         navigate(Routes.DashBoardActivity.full)
                     }
                 }
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.color_0148a4),
-                contentColor = Color.White
-            ),
-            border =  BorderStroke(
-                width = 1.dp,
-                color = colorResource(R.color.color_013684)
-            ),
-            modifier = Modifier.width(220.dp).height(65.dp)
-                .shadow(elevation = 30.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(
-                    R.color.color_803667A6
-                ))
+            }, colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.color_0148a4), contentColor = Color.White
+            ), border = BorderStroke(
+                width = 1.dp, color = colorResource(R.color.color_013684)
+            ), modifier = Modifier
+                .width(220.dp)
+                .height(65.dp)
+                .shadow(
+                    elevation = 30.dp, shape = RoundedCornerShape(50), spotColor = colorResource(
+                        R.color.color_803667A6
+                    )
+                )
 
 
         ) {
-            Text("LOG IN",
+            Text(
+                "LOG IN",
                 fontWeight = FontWeight.W800,
                 fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Right,
@@ -297,31 +336,35 @@ fun LoginScreen() {
         Spacer(Modifier.height(45.dp))
 
 
-        Text("Or connect using",
+        Text(
+            "Or connect using",
             fontWeight = FontWeight.W400,
             fontFamily = FontFamily.SansSerif,
             textAlign = TextAlign.Center,
             fontSize = 16.sp,
             color = colorResource(R.color.color_9f9f9f),
-            modifier = Modifier.fillMaxWidth())
+            modifier = Modifier.fillMaxWidth()
+        )
         Spacer(Modifier.height(20.dp))
 
         Row() {
             Box(
                 modifier = Modifier
-                    .background(colorResource(R.color.facebook_bg_color), shape = RoundedCornerShape(20))
-                    .padding(25.dp,12.dp).width(100.dp)
+                    .background(
+                        colorResource(R.color.facebook_bg_color), shape = RoundedCornerShape(20)
+                    )
+                    .padding(25.dp, 12.dp)
+                    .width(100.dp)
             ) {
                 Row(
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterStart)
+                    modifier = Modifier.align(alignment = Alignment.CenterStart)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.facebook_icon),
                         contentDescription = null,
                         modifier = Modifier
                             .size(23.dp)
-                            .padding(end=12.dp)
+                            .padding(end = 12.dp)
                     )
                     Text(
                         text = "Facebook",
@@ -335,19 +378,21 @@ fun LoginScreen() {
             Spacer(Modifier.width(16.dp))
             Box(
                 modifier = Modifier
-                    .background(colorResource(R.color.google_bg_color), shape = RoundedCornerShape(20))
-                    .padding(32.dp,9.dp).width(100.dp)
+                    .background(
+                        colorResource(R.color.google_bg_color), shape = RoundedCornerShape(20)
+                    )
+                    .padding(32.dp, 9.dp)
+                    .width(100.dp)
             ) {
                 Row(
-                    modifier = Modifier
-                        .align(alignment = Alignment.CenterStart)
+                    modifier = Modifier.align(alignment = Alignment.CenterStart)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.google_icon),
                         contentDescription = null,
                         modifier = Modifier
                             .size(29.dp)
-                            .padding(end=12.dp)
+                            .padding(end = 12.dp)
                     )
                     Text(
                         text = "Google",
@@ -373,18 +418,16 @@ fun LoginScreen() {
                 color = colorResource(R.color.color_2069d2),
                 fontWeight = FontWeight.W800,
                 modifier = Modifier.clickable() {
-                     showBottomSheet = true
+                    showBottomSheet = true
 
                 },
             )
         }
 
         if (showBottomSheet) {
-            ModalBottomSheet(
-                modifier = Modifier.fillMaxHeight(),
+            ModalBottomSheet(modifier = Modifier.fillMaxHeight(),
                 sheetState = sheetState,
-                onDismissRequest = { showBottomSheet = false }
-            ) {
+                onDismissRequest = { showBottomSheet = false }) {
                 SignUpActivity()
             }
         }
@@ -414,59 +457,68 @@ fun SignUpActivity() {
         Modifier
             .background(colorResource(R.color.white))
             .fillMaxSize()
-            .padding(20.dp, 0.dp).verticalScroll(signUpScrollState),
-        horizontalAlignment  =  Alignment.CenterHorizontally){
+            .padding(20.dp, 0.dp)
+            .verticalScroll(signUpScrollState), horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         Spacer(Modifier.height(40.dp))
-        Text("Let's Get Started!",
+        Text(
+            "Let's Get Started!",
             fontWeight = FontWeight.W700,
             fontFamily = FontFamily.SansSerif,
             textAlign = TextAlign.Center,
             fontSize = 30.sp,
             color = colorResource(R.color.black),
-            modifier = Modifier.fillMaxWidth())
+            modifier = Modifier.fillMaxWidth()
+        )
         Spacer(Modifier.height(8.dp))
-        Text("Create an account to Q Allure to get all features",
+        Text(
+            "Create an account to Q Allure to get all features",
             fontWeight = FontWeight.W400,
             fontFamily = FontFamily.SansSerif,
             textAlign = TextAlign.Center,
             fontSize = 16.sp,
             color = colorResource(R.color.color_898989),
-            modifier = Modifier.fillMaxWidth())
+            modifier = Modifier.fillMaxWidth()
+        )
         Spacer(Modifier.height(50.dp))
-        TextField(  modifier = Modifier
-            .fillMaxWidth()
-            .shadow(elevation = 40.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_CCCCCCCC))
-            .background(color = colorResource(R.color.white))
-            .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = getColorWithDelay(isSignupNameFocused,
-                        R.color.color_focus,
-                        R.color.white
-                    )
-                ),
-                shape = RoundedCornerShape(50)
-            )
-            .focusRequester(focusRequester)
-            .onFocusChanged { focusState -> isSignupNameFocused = focusState.isFocused },
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 40.dp,
+                    shape = RoundedCornerShape(50),
+                    spotColor = colorResource(R.color.color_CCCCCCCC)
+                )
+                .background(color = colorResource(R.color.white))
+                .border(
+                    BorderStroke(
+                        width = 1.dp, color = getColorWithDelay(
+                            isSignupNameFocused, R.color.color_focus, R.color.white
+                        )
+                    ), shape = RoundedCornerShape(50)
+                )
+                .focusRequester(focusRequester)
+                .onFocusChanged { focusState -> isSignupNameFocused = focusState.isFocused },
             value = signupName,
-            leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "personIcon", tint = getColorWithDelay(isSignupNameFocused,
-                R.color.color_focus,
-                R.color.color_non_focus
-            )
-            ) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = "personIcon",
+                    tint = getColorWithDelay(
+                        isSignupNameFocused, R.color.color_focus, R.color.color_non_focus
+                    )
+                )
+            },
 
             textStyle = androidx.compose.ui.text.TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupPhoneFocused,
-                    R.color.color_focus,
-                    R.color.color_non_focus
+                fontSize = 16.sp, fontWeight = FontWeight.Bold, color = getColorWithDelay(
+                    isSignupPhoneFocused, R.color.color_focus, R.color.color_non_focus
                 )
             ),
             placeholder = {
-                Text("Name",
+                Text(
+                    "Name",
                     fontWeight = FontWeight.W400,
                     fontFamily = FontFamily.SansSerif,
                     fontSize = 16.sp,
@@ -480,39 +532,43 @@ fun SignUpActivity() {
 
         Spacer(Modifier.height(30.dp))
 
-        TextField(  modifier = Modifier
-            .fillMaxWidth()
-            .shadow(elevation = 40.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_CCCCCCCC))
-            .background(color = colorResource(R.color.white))
-            .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = getColorWithDelay(isSignupEmailFocused,
-                        R.color.color_focus,
-                        R.color.white
-                    )
-                ),
-                shape = RoundedCornerShape(50)
-            )
-            .focusRequester(focusRequester)
-            .onFocusChanged { focusState -> isSignupEmailFocused = focusState.isFocused },
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 40.dp,
+                    shape = RoundedCornerShape(50),
+                    spotColor = colorResource(R.color.color_CCCCCCCC)
+                )
+                .background(color = colorResource(R.color.white))
+                .border(
+                    BorderStroke(
+                        width = 1.dp, color = getColorWithDelay(
+                            isSignupEmailFocused, R.color.color_focus, R.color.white
+                        )
+                    ), shape = RoundedCornerShape(50)
+                )
+                .focusRequester(focusRequester)
+                .onFocusChanged { focusState -> isSignupEmailFocused = focusState.isFocused },
             value = signupEmail,
-            leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "personIcon", tint = getColorWithDelay(isSignupEmailFocused,
-                R.color.color_focus,
-                R.color.color_non_focus
-            )
-            ) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Email,
+                    contentDescription = "personIcon",
+                    tint = getColorWithDelay(
+                        isSignupEmailFocused, R.color.color_focus, R.color.color_non_focus
+                    )
+                )
+            },
 
             textStyle = androidx.compose.ui.text.TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupPhoneFocused,
-                    R.color.color_focus,
-                    R.color.color_non_focus
+                fontSize = 16.sp, fontWeight = FontWeight.Bold, color = getColorWithDelay(
+                    isSignupPhoneFocused, R.color.color_focus, R.color.color_non_focus
                 )
             ),
             placeholder = {
-                Text("Email",
+                Text(
+                    "Email",
                     fontWeight = FontWeight.W400,
                     fontFamily = FontFamily.SansSerif,
                     fontSize = 16.sp,
@@ -525,39 +581,43 @@ fun SignUpActivity() {
         )
 
         Spacer(Modifier.height(30.dp))
-        TextField(  modifier = Modifier
-            .fillMaxWidth()
-            .shadow(elevation = 40.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_CCCCCCCC))
-            .background(color = colorResource(R.color.white))
-            .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = getColorWithDelay(isSignupPhoneFocused,
-                        R.color.color_focus,
-                        R.color.white
-                    )
-                ),
-                shape = RoundedCornerShape(50)
-            )
-            .focusRequester(focusRequester)
-            .onFocusChanged { focusState -> isSignupPhoneFocused = focusState.isFocused },
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 40.dp,
+                    shape = RoundedCornerShape(50),
+                    spotColor = colorResource(R.color.color_CCCCCCCC)
+                )
+                .background(color = colorResource(R.color.white))
+                .border(
+                    BorderStroke(
+                        width = 1.dp, color = getColorWithDelay(
+                            isSignupPhoneFocused, R.color.color_focus, R.color.white
+                        )
+                    ), shape = RoundedCornerShape(50)
+                )
+                .focusRequester(focusRequester)
+                .onFocusChanged { focusState -> isSignupPhoneFocused = focusState.isFocused },
             value = signupPhone,
-            leadingIcon = { Icon(imageVector = Icons.Default.Phone, contentDescription = "personIcon", tint = getColorWithDelay(isSignupPhoneFocused,
-                R.color.color_focus,
-                R.color.color_non_focus
-            )
-            ) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Phone,
+                    contentDescription = "personIcon",
+                    tint = getColorWithDelay(
+                        isSignupPhoneFocused, R.color.color_focus, R.color.color_non_focus
+                    )
+                )
+            },
 
             textStyle = androidx.compose.ui.text.TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupPhoneFocused,
-                    R.color.color_focus,
-                    R.color.color_non_focus
+                fontSize = 16.sp, fontWeight = FontWeight.Bold, color = getColorWithDelay(
+                    isSignupPhoneFocused, R.color.color_focus, R.color.color_non_focus
                 )
             ),
             placeholder = {
-                Text("Phone",
+                Text(
+                    "Phone",
                     fontWeight = FontWeight.W400,
                     fontFamily = FontFamily.SansSerif,
                     fontSize = 16.sp,
@@ -571,29 +631,35 @@ fun SignUpActivity() {
 
         Spacer(Modifier.height(30.dp))
 
-        TextField(  modifier = Modifier
-            .fillMaxWidth()
-            .shadow(elevation = 40.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_CCCCCCCC))
-            .background(color = colorResource(R.color.white))
-            .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = getColorWithDelay(isSignupPasswordFocused,
-                        R.color.color_focus,
-                        R.color.white
-                    )
-                ),
-                shape = RoundedCornerShape(50)
-            )
-            .focusRequester(focusRequester)
-            .onFocusChanged { focusState -> isSignupPasswordFocused = focusState.isFocused },
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 40.dp,
+                    shape = RoundedCornerShape(50),
+                    spotColor = colorResource(R.color.color_CCCCCCCC)
+                )
+                .background(color = colorResource(R.color.white))
+                .border(
+                    BorderStroke(
+                        width = 1.dp, color = getColorWithDelay(
+                            isSignupPasswordFocused, R.color.color_focus, R.color.white
+                        )
+                    ), shape = RoundedCornerShape(50)
+                )
+                .focusRequester(focusRequester)
+                .onFocusChanged { focusState -> isSignupPasswordFocused = focusState.isFocused },
             value = signupPassword,
 
-            leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "personIcon",tint = getColorWithDelay(isSignupPasswordFocused,
-                R.color.color_focus,
-                R.color.color_non_focus
-            )
-            ) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = "personIcon",
+                    tint = getColorWithDelay(
+                        isSignupPasswordFocused, R.color.color_focus, R.color.color_non_focus
+                    )
+                )
+            },
             visualTransformation = if (isSignupPasswordFocused) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
                 val image = if (isSignupPasswordFocused) Icons.Filled.Check else Icons.Filled.Clear
@@ -607,15 +673,13 @@ fun SignUpActivity() {
             },
 
             textStyle = androidx.compose.ui.text.TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupPhoneFocused,
-                    R.color.color_focus,
-                    R.color.color_non_focus
+                fontSize = 16.sp, fontWeight = FontWeight.Bold, color = getColorWithDelay(
+                    isSignupPhoneFocused, R.color.color_focus, R.color.color_non_focus
                 )
             ),
             placeholder = {
-                Text("Password",
+                Text(
+                    "Password",
                     fontWeight = FontWeight.W400,
                     fontFamily = FontFamily.SansSerif,
                     fontSize = 16.sp,
@@ -630,41 +694,48 @@ fun SignUpActivity() {
         Spacer(Modifier.height(30.dp))
 
 
-        TextField(  modifier = Modifier
-            .fillMaxWidth()
-            .shadow(elevation = 40.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_CCCCCCCC))
-            .background(color = colorResource(R.color.white))
-            .border(
-                BorderStroke(
-                    width = 1.dp,
-                    color = getColorWithDelay(isSignupConfirmPasswordFocused,
-                        R.color.color_focus,
-                        R.color.white
-                    )
-                ),
-                shape = RoundedCornerShape(50)
-            )
-            .focusRequester(focusRequester)
-            .onFocusChanged { focusState ->
-                isSignupConfirmPasswordFocused = focusState.isFocused
-            },
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadow(
+                    elevation = 40.dp,
+                    shape = RoundedCornerShape(50),
+                    spotColor = colorResource(R.color.color_CCCCCCCC)
+                )
+                .background(color = colorResource(R.color.white))
+                .border(
+                    BorderStroke(
+                        width = 1.dp, color = getColorWithDelay(
+                            isSignupConfirmPasswordFocused, R.color.color_focus, R.color.white
+                        )
+                    ), shape = RoundedCornerShape(50)
+                )
+                .focusRequester(focusRequester)
+                .onFocusChanged { focusState ->
+                    isSignupConfirmPasswordFocused = focusState.isFocused
+                },
             value = signupConfirmPassword,
             visualTransformation = PasswordVisualTransformation(),
-            leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "personIcon", tint =  getColorWithDelay(isSignupConfirmPasswordFocused,
-                R.color.color_focus,
-                R.color.color_non_focus
-            )
-            ) },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = "personIcon",
+                    tint = getColorWithDelay(
+                        isSignupConfirmPasswordFocused, R.color.color_focus, R.color.color_non_focus
+                    )
+                )
+            },
 
             textStyle = androidx.compose.ui.text.TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupConfirmPasswordFocused, R.color.color_focus , R.color.color_non_focus)
+                fontSize = 16.sp, fontWeight = FontWeight.Bold, color = getColorWithDelay(
+                    isSignupConfirmPasswordFocused, R.color.color_focus, R.color.color_non_focus
+                )
 
 
             ),
             placeholder = {
-                Text("Confirm Password",
+                Text(
+                    "Confirm Password",
                     fontWeight = FontWeight.W400,
                     fontFamily = FontFamily.SansSerif,
                     fontSize = 16.sp,
@@ -678,24 +749,23 @@ fun SignUpActivity() {
 
         Spacer(Modifier.height(70.dp))
         Button(
-            onClick = {
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.color_0148a4),
-                contentColor = Color.White
-            ),
-            border =  BorderStroke(
-                width = 1.dp,
-                color = colorResource(R.color.color_013684)
-            ),
-            modifier = Modifier.width(220.dp).height(65.dp)
-                .shadow(elevation = 30.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(
-                    R.color.color_803667A6
-                ))
+            onClick = {}, colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.color_0148a4), contentColor = Color.White
+            ), border = BorderStroke(
+                width = 1.dp, color = colorResource(R.color.color_013684)
+            ), modifier = Modifier
+                .width(220.dp)
+                .height(65.dp)
+                .shadow(
+                    elevation = 30.dp, shape = RoundedCornerShape(50), spotColor = colorResource(
+                        R.color.color_803667A6
+                    )
+                )
 
 
         ) {
-            Text("CREATE",
+            Text(
+                "CREATE",
                 fontWeight = FontWeight.W800,
                 fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Right,
@@ -730,38 +800,33 @@ fun SignUpActivity() {
 }
 
 
-
-
-
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "app_information")
 
 object PreferenceKeys {
     val IS_FIRST_OPEN = booleanPreferencesKey("is_first_open")
     val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
 }
+
 suspend fun savePreference(input: Boolean, context: Context, key: Preferences.Key<Boolean>) {
     context.dataStore.edit { preferences ->
         preferences[key] = input
     }
 }
+
 fun getPreference(context: Context, key: Preferences.Key<Boolean>): Flow<Boolean> {
-    return context.dataStore.data
-        .map { preferences ->
-            preferences[key] ?: false
-        }
+    return context.dataStore.data.map { preferences ->
+        preferences[key] ?: false
+    }
 }
-
-
 
 
 @Composable
 fun getColorWithDelay(isFocused: Boolean, startColor: Int, endColor: Int): Color {
-    val newColor by animateColorAsState(
-        targetValue = colorResource(if (isFocused) startColor else endColor),
-        animationSpec = tween(durationMillis = 5*1000), finishedListener = {
+    val newColor by animateColorAsState(targetValue = colorResource(if (isFocused) startColor else endColor),
+        animationSpec = tween(durationMillis = 5 * 1000),
+        finishedListener = {
 
-        }
-    )
+        })
     return newColor
 }
 

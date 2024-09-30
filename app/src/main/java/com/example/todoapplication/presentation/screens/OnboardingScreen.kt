@@ -41,9 +41,9 @@ import javax.inject.Inject
 fun OnboardingScreen() {
     var showOnboarding by rememberSaveable { mutableStateOf(true) }
     val myViewModel: WirelessViewModel = viewModel()
-    if(showOnboarding)
+    if (showOnboarding)
         OnboardingScreenLayout(onFinishOnboarding = { showOnboarding = false })
-    else{
+    else {
         LaunchedEffect(Unit) {
             myViewModel.navigation {
                 navigate(Routes.DashBoardActivity.full)
@@ -68,52 +68,58 @@ fun OnboardingScreenLayout(onFinishOnboarding: () -> Unit) {
 
 
 
-        Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(30.dp)
-                .fillMaxSize()
-                .border(
-                    BorderStroke(
-                        width = 1.dp,
-                        color = colorResource(R.color.white),
-                    ), shape = RoundedCornerShape(10.dp),
-                )) {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = onboardingPages[currentPage].title,
-                fontWeight = FontWeight.W800,
-                fontFamily = FontFamily.SansSerif,
-                textAlign = TextAlign.Center,
-                fontSize = 26.sp,
-                color = colorResource(R.color.color_013684),
-                modifier = Modifier.fillMaxWidth()
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .padding(30.dp)
+            .fillMaxSize()
+            .border(
+                BorderStroke(
+                    width = 1.dp,
+                    color = colorResource(R.color.white),
+                ),
+                shape = RoundedCornerShape(10.dp),
+            )
+    ) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = onboardingPages[currentPage].title,
+            fontWeight = FontWeight.W800,
+            fontFamily = FontFamily.SansSerif,
+            textAlign = TextAlign.Center,
+            fontSize = 26.sp,
+            color = colorResource(R.color.color_013684),
+            modifier = Modifier.fillMaxWidth()
 
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = onboardingPages[currentPage].description,
-                fontWeight = FontWeight.W800,
-                fontFamily = FontFamily.SansSerif,
-                textAlign = TextAlign.Center,
-                fontSize = 16.sp,
-                color = colorResource(R.color.color_1d1e20),
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(40.dp))
-            Button(
-                onClick = {
-                    if (currentPage < onboardingPages.size - 1) {
-                        currentPage++
-                    } else {
-                        onFinishOnboarding()
-                    }
-                },
-                modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth()
-            ) {
-                Text(text = if (currentPage == onboardingPages.size - 1) "Finish" else "Next")
-            }
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = onboardingPages[currentPage].description,
+            fontWeight = FontWeight.W800,
+            fontFamily = FontFamily.SansSerif,
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp,
+            color = colorResource(R.color.color_1d1e20),
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(40.dp))
+        Button(
+            onClick = {
+                if (currentPage < onboardingPages.size - 1) {
+                    currentPage++
+                } else {
+                    onFinishOnboarding()
+                }
+            },
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth()
+        ) {
+            Text(text = if (currentPage == onboardingPages.size - 1) "Finish" else "Next")
         }
     }
+}
 
 
 

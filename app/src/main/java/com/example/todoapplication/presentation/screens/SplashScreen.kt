@@ -38,7 +38,7 @@ import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 @Composable
-fun SplashScreen(){
+fun SplashScreen() {
     val myViewModel: WirelessViewModel = viewModel()
     SplashScreenLayout(myViewModel)
 }
@@ -47,31 +47,38 @@ fun SplashScreen(){
 private fun SplashScreenLayout(myViewModel: WirelessViewModel) {
 
 
-    val context= LocalContext.current
+    val context = LocalContext.current
     val isLoggedInFlow = getPreference(context, IS_LOGGED_IN)
     val isLoggedIn by isLoggedInFlow.collectAsState(initial = true)
 
 
-    Column(modifier = Modifier.fillMaxSize().background(color = Color.White), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
-        Text("Todo Application",
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.White),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            "Todo Application",
             fontWeight = FontWeight.W700,
             fontFamily = FontFamily.SansSerif,
             textAlign = TextAlign.Center,
             fontSize = 30.sp,
             color = colorResource(R.color.black),
-            modifier = Modifier.fillMaxWidth())
+            modifier = Modifier.fillMaxWidth()
+        )
         AnimatedPreloader()
     }
 
     LaunchedEffect(Unit) {
-        delay(5*1000)
+        delay(5 * 1000)
 
-        if(!isLoggedIn) {
+        if (!isLoggedIn) {
             myViewModel.navigation {
                 navigate(Routes.LoginActivity.full)
             }
-        }
-        else{
+        } else {
             myViewModel.navigation {
                 navigate(Routes.DashBoardActivity.full)
             }
@@ -80,7 +87,11 @@ private fun SplashScreenLayout(myViewModel: WirelessViewModel) {
 }
 
 @Composable
-fun AnimatedPreloader(modifier: Modifier = Modifier.fillMaxWidth().background(color = Color.White)) {
+fun AnimatedPreloader(
+    modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .background(color = Color.White)
+) {
 
     val preloaderLottieComposition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(

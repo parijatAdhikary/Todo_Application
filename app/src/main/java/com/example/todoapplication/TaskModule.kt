@@ -11,9 +11,11 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @Module
 @InstallIn(ViewModelComponent::class)
 object TaskModule {
+
     @Provides
     @ViewModelScoped
     fun provideTaskRepository(taskDao: TaskDao): TaskRepository {
         return TaskRepositoryImpl(taskDao)
     }
+
 }

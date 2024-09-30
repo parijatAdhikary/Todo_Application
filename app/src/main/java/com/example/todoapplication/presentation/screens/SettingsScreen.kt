@@ -35,15 +35,19 @@ fun ToggleSwitch() {
 
     Row(modifier = Modifier.padding(16.dp), horizontalArrangement = Arrangement.SpaceBetween) {
 
-        Text(text = if (isChecked.value) "Dark mode is ON" else "Dark mode is OFF", modifier = Modifier.padding(0.dp,30.dp,100.dp,0.dp)
-        ,fontWeight = FontWeight.W700,
+        Text(
+            text = if (isChecked.value) "Dark mode is ON" else "Dark mode is OFF",
+            modifier = Modifier.padding(0.dp, 30.dp, 100.dp, 0.dp),
+            fontWeight = FontWeight.W700,
             fontFamily = FontFamily.SansSerif,
             textAlign = TextAlign.Center,
             fontSize = 20.sp,
-            color = colorResource(R.color.black),)
+            color = colorResource(R.color.black),
+        )
         Switch(
             checked = isChecked.value,
-            onCheckedChange = { isChecked.value = it },modifier = Modifier.padding(0.dp,14.dp,0.dp,0.dp)
+            onCheckedChange = { isChecked.value = it },
+            modifier = Modifier.padding(0.dp, 14.dp, 0.dp, 0.dp)
         )
     }
 }
