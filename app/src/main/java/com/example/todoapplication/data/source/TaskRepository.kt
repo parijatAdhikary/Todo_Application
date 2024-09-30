@@ -8,5 +8,4 @@ interface TaskRepository {
     suspend fun getAllTasks(): List<Task>
     suspend fun deleteTaskById(taskId: Long)
     suspend fun updateTaskById(taskId: Long, taskName: String, taskDate: String)
-    abstract fun setDao(taskDao: TaskDao)
 }
