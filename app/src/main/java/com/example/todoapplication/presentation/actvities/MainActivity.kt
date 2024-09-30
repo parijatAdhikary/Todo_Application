@@ -1,21 +1,17 @@
-package com.example.todoapplication
+package com.example.todoapplication.presentation.actvities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.debduttapanda.j3lib.MyScreen
-import com.debduttapanda.j3lib.arguments
-import com.debduttapanda.j3lib.models.Route
 import com.debduttapanda.j3lib.wvm
-import com.example.todoapplication.Routes.LoginActivity
+import com.example.todoapplication.Routes
+import com.example.todoapplication.presentation.screens.*
+import com.example.todoapplication.presentation.viewmodes.*
 import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.example.todoapplication
+package com.example.todoapplication.presentation.screens
 
 import android.app.Activity
 import android.content.Context
@@ -73,13 +73,14 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
-import com.example.todoapplication.PreferenceKeys.IS_FIRST_OPEN
-import com.example.todoapplication.PreferenceKeys.IS_LOGGED_IN
+import com.example.todoapplication.R
+import com.example.todoapplication.Routes
+import com.example.todoapplication.presentation.screens.PreferenceKeys.IS_FIRST_OPEN
+import com.example.todoapplication.presentation.screens.PreferenceKeys.IS_LOGGED_IN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -150,7 +151,7 @@ fun LoginScreen() {
             .border(
                 BorderStroke(
                     width = 1.dp,
-                    color = getColorWithDelay(isEmailFocused,R.color.color_focus,R.color.white),
+                    color = getColorWithDelay(isEmailFocused, R.color.color_focus, R.color.white),
                 ),
                 shape = RoundedCornerShape(50)
             )
@@ -190,7 +191,7 @@ fun LoginScreen() {
             .border(
                 BorderStroke(
                     width = 1.dp,
-                    color = getColorWithDelay(isPasswordFocused,R.color.color_focus,R.color.white)
+                    color = getColorWithDelay(isPasswordFocused, R.color.color_focus, R.color.white)
                 ),
                 shape = RoundedCornerShape(50)
             )
@@ -279,7 +280,9 @@ fun LoginScreen() {
                 color = colorResource(R.color.color_013684)
             ),
             modifier = Modifier.width(220.dp).height(65.dp)
-                .shadow(elevation = 30.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_803667A6))
+                .shadow(elevation = 30.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(
+                    R.color.color_803667A6
+                ))
 
 
         ) {
@@ -438,19 +441,29 @@ fun SignUpActivity() {
             .border(
                 BorderStroke(
                     width = 1.dp,
-                    color =getColorWithDelay(isSignupNameFocused,R.color.color_focus,R.color.white)
+                    color = getColorWithDelay(isSignupNameFocused,
+                        R.color.color_focus,
+                        R.color.white
+                    )
                 ),
                 shape = RoundedCornerShape(50)
             )
             .focusRequester(focusRequester)
             .onFocusChanged { focusState -> isSignupNameFocused = focusState.isFocused },
             value = signupName,
-            leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "personIcon", tint = getColorWithDelay(isSignupNameFocused,R.color.color_focus,R.color.color_non_focus)) },
+            leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "personIcon", tint = getColorWithDelay(isSignupNameFocused,
+                R.color.color_focus,
+                R.color.color_non_focus
+            )
+            ) },
 
             textStyle = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupPhoneFocused,R.color.color_focus,R.color.color_non_focus)
+                color = getColorWithDelay( isSignupPhoneFocused,
+                    R.color.color_focus,
+                    R.color.color_non_focus
+                )
             ),
             placeholder = {
                 Text("Name",
@@ -474,19 +487,29 @@ fun SignUpActivity() {
             .border(
                 BorderStroke(
                     width = 1.dp,
-                    color =getColorWithDelay(isSignupEmailFocused,R.color.color_focus,R.color.white)
+                    color = getColorWithDelay(isSignupEmailFocused,
+                        R.color.color_focus,
+                        R.color.white
+                    )
                 ),
                 shape = RoundedCornerShape(50)
             )
             .focusRequester(focusRequester)
             .onFocusChanged { focusState -> isSignupEmailFocused = focusState.isFocused },
             value = signupEmail,
-            leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "personIcon", tint = getColorWithDelay(isSignupEmailFocused,R.color.color_focus,R.color.color_non_focus)) },
+            leadingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "personIcon", tint = getColorWithDelay(isSignupEmailFocused,
+                R.color.color_focus,
+                R.color.color_non_focus
+            )
+            ) },
 
             textStyle = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupPhoneFocused,R.color.color_focus,R.color.color_non_focus)
+                color = getColorWithDelay( isSignupPhoneFocused,
+                    R.color.color_focus,
+                    R.color.color_non_focus
+                )
             ),
             placeholder = {
                 Text("Email",
@@ -509,19 +532,29 @@ fun SignUpActivity() {
             .border(
                 BorderStroke(
                     width = 1.dp,
-                    color =getColorWithDelay(isSignupPhoneFocused,R.color.color_focus,R.color.white)
+                    color = getColorWithDelay(isSignupPhoneFocused,
+                        R.color.color_focus,
+                        R.color.white
+                    )
                 ),
                 shape = RoundedCornerShape(50)
             )
             .focusRequester(focusRequester)
             .onFocusChanged { focusState -> isSignupPhoneFocused = focusState.isFocused },
             value = signupPhone,
-            leadingIcon = { Icon(imageVector = Icons.Default.Phone, contentDescription = "personIcon", tint = getColorWithDelay(isSignupPhoneFocused,R.color.color_focus,R.color.color_non_focus)) },
+            leadingIcon = { Icon(imageVector = Icons.Default.Phone, contentDescription = "personIcon", tint = getColorWithDelay(isSignupPhoneFocused,
+                R.color.color_focus,
+                R.color.color_non_focus
+            )
+            ) },
 
             textStyle = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupPhoneFocused,R.color.color_focus,R.color.color_non_focus)
+                color = getColorWithDelay( isSignupPhoneFocused,
+                    R.color.color_focus,
+                    R.color.color_non_focus
+                )
             ),
             placeholder = {
                 Text("Phone",
@@ -545,7 +578,10 @@ fun SignUpActivity() {
             .border(
                 BorderStroke(
                     width = 1.dp,
-                    color =getColorWithDelay(isSignupPasswordFocused,R.color.color_focus,R.color.white)
+                    color = getColorWithDelay(isSignupPasswordFocused,
+                        R.color.color_focus,
+                        R.color.white
+                    )
                 ),
                 shape = RoundedCornerShape(50)
             )
@@ -553,7 +589,11 @@ fun SignUpActivity() {
             .onFocusChanged { focusState -> isSignupPasswordFocused = focusState.isFocused },
             value = signupPassword,
 
-            leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "personIcon",tint = getColorWithDelay(isSignupPasswordFocused,R.color.color_focus,R.color.color_non_focus)) },
+            leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "personIcon",tint = getColorWithDelay(isSignupPasswordFocused,
+                R.color.color_focus,
+                R.color.color_non_focus
+            )
+            ) },
             visualTransformation = if (isSignupPasswordFocused) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
                 val image = if (isSignupPasswordFocused) Icons.Filled.Check else Icons.Filled.Clear
@@ -569,7 +609,10 @@ fun SignUpActivity() {
             textStyle = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold ,
-                color = getColorWithDelay( isSignupPhoneFocused,R.color.color_focus,R.color.color_non_focus)
+                color = getColorWithDelay( isSignupPhoneFocused,
+                    R.color.color_focus,
+                    R.color.color_non_focus
+                )
             ),
             placeholder = {
                 Text("Password",
@@ -594,7 +637,10 @@ fun SignUpActivity() {
             .border(
                 BorderStroke(
                     width = 1.dp,
-                    color =getColorWithDelay(isSignupConfirmPasswordFocused,R.color.color_focus,R.color.white)
+                    color = getColorWithDelay(isSignupConfirmPasswordFocused,
+                        R.color.color_focus,
+                        R.color.white
+                    )
                 ),
                 shape = RoundedCornerShape(50)
             )
@@ -604,7 +650,11 @@ fun SignUpActivity() {
             },
             value = signupConfirmPassword,
             visualTransformation = PasswordVisualTransformation(),
-            leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "personIcon", tint =  getColorWithDelay(isSignupConfirmPasswordFocused,R.color.color_focus,R.color.color_non_focus)) },
+            leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "personIcon", tint =  getColorWithDelay(isSignupConfirmPasswordFocused,
+                R.color.color_focus,
+                R.color.color_non_focus
+            )
+            ) },
 
             textStyle = androidx.compose.ui.text.TextStyle(
                 fontSize = 16.sp,
@@ -639,7 +689,9 @@ fun SignUpActivity() {
                 color = colorResource(R.color.color_013684)
             ),
             modifier = Modifier.width(220.dp).height(65.dp)
-                .shadow(elevation = 30.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(R.color.color_803667A6))
+                .shadow(elevation = 30.dp, shape = RoundedCornerShape(50), spotColor =  colorResource(
+                    R.color.color_803667A6
+                ))
 
 
         ) {
@@ -715,23 +767,3 @@ fun getColorWithDelay(isFocused: Boolean, startColor: Int, endColor: Int): Color
 
 
 
-
-
-@HiltViewModel
-class LoginScreenViewModel @Inject constructor(): WirelessViewModel(){
-    override fun eventBusDescription(): EventBusDescription? {
-        return null
-    }
-
-    override fun interCom(message: InterCom) {
-    }
-
-    override fun onBack() {
-    }
-
-    override fun onNotification(id: Any?, arg: Any?) {
-    }
-
-    override fun onStartUp(route: Route?, arguments: Bundle?) {
-    }
-}

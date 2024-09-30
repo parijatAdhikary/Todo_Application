@@ -1,5 +1,6 @@
 package com.example.todoapplication
 
+import com.example.todoapplication.data.repositoryimplement.SomeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

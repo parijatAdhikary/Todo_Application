@@ -1,4 +1,4 @@
-package com.example.todoapplication
+package com.example.todoapplication.presentation.screens
 
 import android.os.Bundle
 import androidx.compose.foundation.BorderStroke
@@ -28,11 +28,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
+import com.example.todoapplication.R
+import com.example.todoapplication.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -116,22 +117,3 @@ fun OnboardingScreenLayout(onFinishOnboarding: () -> Unit) {
 
 
 
-
-@HiltViewModel
-class OnboardingScreenViewModel @Inject constructor(): WirelessViewModel(){
-    override fun eventBusDescription(): EventBusDescription? {
-        return null
-    }
-
-    override fun interCom(message: InterCom) {
-    }
-
-    override fun onBack() {
-    }
-
-    override fun onNotification(id: Any?, arg: Any?) {
-    }
-
-    override fun onStartUp(route: Route?, arguments: Bundle?) {
-    }
-}

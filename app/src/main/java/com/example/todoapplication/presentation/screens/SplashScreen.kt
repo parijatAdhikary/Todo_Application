@@ -1,4 +1,4 @@
-package com.example.todoapplication
+package com.example.todoapplication.presentation.screens
 
 import android.os.Bundle
 import androidx.compose.foundation.background
@@ -30,7 +30,9 @@ import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
-import com.example.todoapplication.PreferenceKeys.IS_LOGGED_IN
+import com.example.todoapplication.R
+import com.example.todoapplication.Routes
+import com.example.todoapplication.presentation.screens.PreferenceKeys.IS_LOGGED_IN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -101,22 +103,3 @@ fun AnimatedPreloader(modifier: Modifier = Modifier.fillMaxWidth().background(co
 }
 
 
-
-@HiltViewModel
-class SplashScreenViewModel @Inject constructor(): WirelessViewModel(){
-    override fun eventBusDescription(): EventBusDescription? {
-        return null
-    }
-
-    override fun interCom(message: InterCom) {
-    }
-
-    override fun onBack() {
-    }
-
-    override fun onNotification(id: Any?, arg: Any?) {
-    }
-
-    override fun onStartUp(route: Route?, arguments: Bundle?) {
-    }
-}

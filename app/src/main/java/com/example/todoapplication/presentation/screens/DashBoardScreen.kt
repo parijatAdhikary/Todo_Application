@@ -1,4 +1,4 @@
-package com.example.todoapplication
+package com.example.todoapplication.presentation.screens
 
 import android.app.Activity
 import android.os.Build
@@ -58,6 +58,13 @@ import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
+import com.example.todoapplication.AppDatabase
+import com.example.todoapplication.R
+import com.example.todoapplication.Routes
+import com.example.todoapplication.Task
+import com.example.todoapplication.data.repositoryimplement.TaskRepositoryImplement
+import com.example.todoapplication.TaskViewModelFactory
+import com.example.todoapplication.presentation.viewmodes.TaskViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.YearMonth
 import java.util.Calendar
@@ -92,7 +99,7 @@ fun DashBoardLayout(myViewModel: WirelessViewModel) {
     taskYear = year
 
     val database = AppDatabase.getDatabase(LocalContext.current)
-    val repository = TaskRepository(database.taskDao())
+    val repository = TaskRepositoryImplement(database.taskDao())
     val viewModel: TaskViewModel = viewModel(factory = TaskViewModelFactory(repository))
     var isDatePickerShowing = remember { mutableStateOf(false) }
     var taskName by remember { mutableStateOf("") }
@@ -587,8 +594,8 @@ fun monthView() {
 
             }
         }
-        var totalDaysInThisMonth=daysInMonth()
-        var firstDayNo=firstDayOfMonth()
+        var totalDaysInThisMonth= daysInMonth()
+        var firstDayNo= firstDayOfMonth()
         val currentDate = LocalDate.now()
         val todayDate =currentDate.dayOfMonth
         Log.d("DayTAG", "totalDaysInThisMonth: $totalDaysInThisMonth")
@@ -688,23 +695,3 @@ fun daysInMonth(): Int {
 }
 
 
-
-@HiltViewModel
-class DashBoardViewModel @Inject constructor(): WirelessViewModel(){
-    override fun eventBusDescription(): EventBusDescription? {
-        return null
-    }
-
-    override fun interCom(message: InterCom) {
-    }
-
-    override fun onBack() {
-        finish()
-    }
-
-    override fun onNotification(id: Any?, arg: Any?) {
-    }
-
-    override fun onStartUp(route: Route?, arguments: Bundle?) {
-    }
-}

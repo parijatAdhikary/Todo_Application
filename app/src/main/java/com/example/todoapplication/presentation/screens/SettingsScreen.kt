@@ -1,4 +1,4 @@
-package com.example.todoapplication
+package com.example.todoapplication.presentation.screens
 
 import android.os.Bundle
 import androidx.compose.foundation.layout.Arrangement
@@ -16,11 +16,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
+import com.example.todoapplication.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -49,22 +49,3 @@ fun ToggleSwitch() {
 }
 
 
-
-@HiltViewModel
-class SettingsScreenViewModel @Inject constructor(): WirelessViewModel(){
-    override fun eventBusDescription(): EventBusDescription? {
-        return null
-    }
-
-    override fun interCom(message: InterCom) {
-    }
-
-    override fun onBack() {
-    }
-
-    override fun onNotification(id: Any?, arg: Any?) {
-    }
-
-    override fun onStartUp(route: Route?, arguments: Bundle?) {
-    }
-}
